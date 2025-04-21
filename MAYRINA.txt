@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ryan John Perez</title>
+  <title>Laurence Adriel G Mayrina</title>
   <style>
     /* Reset default styles */
     * {
@@ -24,6 +24,7 @@
       max-width: 1200px;
       margin: auto;
       padding: 20px;
+      background-color: #121212;
     }
 
     #topnav {
@@ -136,13 +137,13 @@
   </ul>
 
   <div id="banner">
-    <h1>This is <em>Ryan John Perez</em></h1>
+    <h1>This is <em>Laurence Adriel G Mayrina</em></h1>
     <p><em>I am modifying this index.html</em></p>
   </div>
 
   <div id="sidebar">
     <h2>About</h2>
-    <p>I am Ryan John Perez taking BSIT/STEM</p>
+    <p>I am Laurence Adriel G Mayrina taking BSIT/STEM</p>
     <h2>Categories</h2>
     <ul>
       <li><a href="#">Introduction to Web Design</a></li>
@@ -198,13 +199,13 @@
         <blockquote><p>This is the updated file</p></blockquote>
       </div>
       <div class="item">
-        You may put your content here.
+        Hi I am Laurence Adriel G Mayrina from STEM243!.
       </div>
     </div>
   </div>
 
   <div id="footer">
-    <p>© 2025 Ryan John Perez. All rights reserved.</p>
+    <p>© 2025 Laurence Adriel G Mayrina. All rights reserved.</p>
   </div>
 </div>
 
