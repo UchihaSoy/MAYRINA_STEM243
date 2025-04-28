@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WELCOME USER!</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        /* Shop Container */
+        .shop-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+        }
+
+        .shop-container select,
+        .shop-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .shop-container button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .shop-container button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Results Container */
+        .results {
+            margin-top: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            text-align: left;
+        }
+
+        .results .result {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .results b {
+            color: #e74c3c;
+        }
+
+        /* Align checkbox with label */
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: start;
+        }
+    </style>
+</head>
+<body>
+    <h1>WELCOME USER!</h1>
+    <div class="shop-container">
+        <label for="product">Select Product:</label>
+        <select id="product">
+            <option value="mouse">Mouse - ₱750</option>
+            <option value="keyboard">Keyboard - ₱1500</option>
+            <option value="monitor">Monitor - ₱12000</option>
+            <option value="motherboard">Motherboard - ₱4000</option>
+            <option value="harddrive">Hard Drive - ₱2000</option>
+            <option value="table">Table - ₱1500</option>
+        </select>
+        <label for="quantity">Enter Quantity:</label>
+        <input type="number" id="quantity" placeholder="Enter quantity" min="1">
+        <div class="checkbox-container">
+            <input type="checkbox" id="student-discount">
+            <label for="student-discount">Are you a student?</label>
+        </div>
+        <button onclick="calculateTotal()">Calculate Total</button>
+    </div>
+    <div id="result-container" class="results" style="display:none;">
+        <div class="result" id="total-price"></div>
+        <div class="result" id="discount"></div>
+        <div class="result" id="discounted-price"></div>
+        <div class="result" id="tax"></div>
+        <div class="result"><b id="final-price"></b></div>
+    </div>
+    <script>
+        // Prices
+        const products = {
+            mouse: 750,
+            keyboard: 1500,
+            monitor: 12000,
+            motherboard: 4000,
+            harddrive: 2000,
+            table: 1500
+        };
+
+        function calculateTotal() {
+            // Get user input
+            const product = document.getElementById("product").value;
+            const quantity = parseInt(document.getElementById("quantity").value);
+            const isStudent = document.getElementById("student-discount").checked;
+
+            // Validate input
+            if (!quantity || quantity <= 0) {
+                alert("Please enter a valid quantity.");
+                return;
+            }
+
+            // Calculate initial total
+            const price_per_item = products[product];
+            let total_price = price_per_item * quantity;
+
+            // Apply product-specific discounts
+            let discount = 0;
+            if (product === "mouse" && total_price > 1000) {
+                discount = total_price * 0.10;
+            } else if (product === "keyboard" && total_price > 2000) {
+                discount = total_price * 0.15;
+            } else if (product === "monitor" && total_price > 4000) {
+                discount = total_price * 0.07;
+            } else if (product === "motherboard" && total_price > 6000) {
+                discount = total_price * 0.06;
+            }
+
+            // Check for student discount
+            if (isStudent) {
+                discount += (total_price - discount) * 0.05;
+            }
+
+            // Apply discount
+            const discounted_price = total_price - discount;
+
+            // Check for tax
+            let tax = 0;
+            if (discounted_price > 8000) {
+                tax = discounted_price * 0.08;
+            }
+
+            const final_price = discounted_price + tax;
+
+            // Display results
+            document.getElementById("total-price").innerHTML = "Total Payment: ₱" + total_price.toFixed(2);
+            document.getElementById("discount").innerHTML = "Discount: ₱" + discount.toFixed(2);
+            document.getElementById("discounted-price").innerHTML = "Price After Discount: ₱" + discounted_price.toFixed(2);
+            document.getElementById("tax").innerHTML = "Tax: ₱" + tax.toFixed(2);
+            document.getElementById("final-price").innerHTML = "Final Price: ₱" + final_price.toFixed(2);
+            document.getElementById("result-container").style.display = "block";
+        }
+    </script>
+</body>
+</html>
